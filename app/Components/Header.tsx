@@ -1,19 +1,26 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { FaMoon, FaSun, FaSearch, FaSignInAlt, FaHome, FaInfoCircle, FaProjectDiagram } from 'react-icons/fa';
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import {
+  FaMoon,
+  FaSun,
+  FaSearch,
+  FaSignInAlt,
+  FaHome,
+  FaInfoCircle,
+  FaProjectDiagram,
+} from "react-icons/fa";
 
 export default function Header() {
-  const [darkMode, setDarkMode] = useState(false);
+  const { theme, setTheme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  function toggleDarkMode() {
-    setDarkMode(!darkMode);
-    if (!darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   return (
     <header className="w-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-6 py-3 flex items-center justify-between">
@@ -50,13 +57,15 @@ export default function Header() {
 
       {/* Right: Dark mode toggle + Sign in */}
       <div className="flex items-center space-x-4">
-        <button
-          onClick={toggleDarkMode}
-          aria-label="Toggle Dark Mode"
-          className="p-2 rounded bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500"
-        >
-          {darkMode ? <FaSun /> : <FaMoon />}
-        </button>
+        {mounted && (
+          <button
+            onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+            className="p-2 rounded bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500"
+            aria-label="Toggle Theme"
+          >
+            {currentTheme === "dark" ? <FaSun /> : <FaMoon />}
+          </button>
+        )}
         <button className="flex items-center space-x-1 px-3 py-1 rounded border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition">
           <FaSignInAlt />
           <span>Sign In</span>
