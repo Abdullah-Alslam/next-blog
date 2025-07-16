@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import { ReactNode, useEffect, useState } from "react";
 
 export default function ThemeCom({ children }: { children: ReactNode }) {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
