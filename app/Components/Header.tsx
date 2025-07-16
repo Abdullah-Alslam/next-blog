@@ -1,7 +1,7 @@
 "use client";
 
 import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
-import { dark, light } from "@clerk/themes";
+import { dark } from "@clerk/themes";
 import { useTheme } from "next-themes";
 import {
   FaMoon,
@@ -29,17 +29,11 @@ export default function Header() {
           <FaHome />
           <span>Home</span>
         </a>
-        <a
-          href="/about"
-          className="flex items-center space-x-1 hover:underline"
-        >
+        <a href="/about" className="flex items-center space-x-1 hover:underline">
           <FaInfoCircle />
           <span>About</span>
         </a>
-        <a
-          href="/projects"
-          className="flex items-center space-x-1 hover:underline"
-        >
+        <a href="/projects" className="flex items-center space-x-1 hover:underline">
           <FaProjectDiagram />
           <span>Projects</span>
         </a>
@@ -67,7 +61,7 @@ export default function Header() {
         <SignedIn>
           <UserButton
             appearance={{
-              baseTheme: theme === "light" ? light : dark,
+              baseTheme: theme === "dark" ? dark : undefined,
             }}
           />
         </SignedIn>
