@@ -13,8 +13,6 @@ export async function POST(req: NextRequest) {
     console.log("User email:", user.email_addresses[0]?.email_address);
   }
 
-    if (evt.type === 'user.created') {
-  console.log('userId:', evt.data.id)
-}
+
   return NextResponse.json({ status: "ok" });
 }
