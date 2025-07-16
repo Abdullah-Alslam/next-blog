@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./Components/Header";
 import { ThemeProvider } from "next-themes";
 import ThemeCom from "./Components/ThemeCom";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,15 +27,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ThemeProvider attribute="class" enableSystem={true}>
-          <ThemeCom>
-          <Header />
-            {children}
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+
+        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+          <ThemeProvider attribute="class" enableSystem={true}>
+            <ThemeCom>
+              <Header />
+              {children}
             </ThemeCom>
-        </ThemeProvider>
-      </body>
-    </html>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
